@@ -18,46 +18,47 @@ public class Cancer {
     
     public static void main(String[] args) {
     
+        String Cstr = "";
     //try catch for file scanning
-    
-    String Cstr = "";
-      try {
+    try {
       File Ctxt = new File("Cancer.txt");
       Scanner scan = new Scanner(Ctxt);
       while(scan.hasNextLine())
       {
           Cstr += scan.nextLine()+"\n";
       }
-      
     } catch (IOException e) {
       System.out.println("An error occurred.");
       e.printStackTrace();
     }
-      
+    //Putting String in to grid
+    for(int r=0;r<grid.length;r++)
+    {
+       for(int c=0;c<grid[r].length;c++)
+       {
+           grid[r][c]=Cstr.substring(r,r+1);
+       }
+    }
+    //Printing out String   
         System.out.println(Cstr);
-        
         search(1,1);
         System.out.println("Number of cancers = " + numcan);
+        System.out.println(grid);
   }
-    
-    
-    
     public static void search(int r, int c)
     {
         if(grid[r][c].equals("-"))
         {
             grid[r][c] = "+";
-            search(r - 1, c - 1);
-            search(r - 1, c);
-            search(r - 1, c + 1);
-            search(r, c - 1);
-            search(r, c + 1);
-            search(r + 1, c - 1);
-            search(r + 1, c);
-            search(r + 1, c + 1);
+            search(r-1,c-1);
+            search(r-1,c);
+            search(r-1,c+1);
+            search(r,c-1);
+            search(r,c+1);
+            search(r+1,c-1);
+            search(r+1,c);
+            search(r+1,c+1);
         }
         numcan++;
-           
     }
-
 }
