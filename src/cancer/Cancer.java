@@ -13,7 +13,8 @@ import java.io.FileNotFoundException;
  */
 public class Cancer {
 
-    private String[][] grid =new String[15][15];
+    private static String[][] grid =new String[15][15];
+    private static int numcan=0;
     
     public static void main(String[] args) {
     
@@ -23,7 +24,10 @@ public class Cancer {
       try {
       File Ctxt = new File("Cancer.txt");
       Scanner scan = new Scanner(Ctxt);
-      Cstr = scan.nextLine();
+      while(scan.hasNextLine())
+      {
+          Cstr += scan.nextLine()+"\n";
+      }
       
     } catch (IOException e) {
       System.out.println("An error occurred.");
@@ -31,6 +35,29 @@ public class Cancer {
     }
       
         System.out.println(Cstr);
+        
+        search(1,1);
+        System.out.println("Number of cancers = " + numcan);
   }
+    
+    
+    
+    public static void search(int r, int c)
+    {
+        if(grid[r][c].equals("-"))
+        {
+            grid[r][c] = "+";
+            search(r - 1, c - 1);
+            search(r - 1, c);
+            search(r - 1, c + 1);
+            search(r, c - 1);
+            search(r, c + 1);
+            search(r + 1, c - 1);
+            search(r + 1, c);
+            search(r + 1, c + 1);
+        }
+        numcan++;
+           
+    }
 
 }
