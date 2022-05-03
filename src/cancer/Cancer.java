@@ -13,7 +13,7 @@ import java.io.FileNotFoundException;
  */
 public class Cancer {
 
-    private static String[][] grid =new String[15][15];
+    private static String[][] grid =new String[17][17];
     private static int numcan=0;
     
     public static void main(String[] args) {
@@ -39,17 +39,35 @@ public class Cancer {
            grid[r][c]=Cstr.substring(r,r+1);
        }
     }
+   
     //Printing out String   
         System.out.println(Cstr);
-        search(1,1);
-        System.out.println("Number of cancers = " + numcan);
-        System.out.println(grid);
+        for(int r=1;r<grid.length-1;r++)
+    {
+       for(int c=1;c<grid[r].length-1;c++)
+       {
+           if(grid[r][c].equals("-"))
+          {
+                   search(r,c);
+                   numcan++;
+          }
+       } 
+    }
+    //System.out.println("Number of cancers = " + numcan);
+    for(int r=0;r<grid.length;r++)
+    {
+       for(int c=0;c<grid[r].length;c++)
+       {
+           System.out.print(grid[r][c]);
+       }
+        System.out.println("");
+    }
   }
     public static void search(int r, int c)
     {
         if(grid[r][c].equals("-"))
         {
-            grid[r][c] = "+";
+            grid[r][c] = " ";
             search(r-1,c-1);
             search(r-1,c);
             search(r-1,c+1);
@@ -59,6 +77,5 @@ public class Cancer {
             search(r+1,c);
             search(r+1,c+1);
         }
-        numcan++;
     }
 }
