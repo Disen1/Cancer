@@ -17,34 +17,45 @@ public class Cancer {
     private static int numcan=0;
     
     public static void main(String[] args) {
-    
-        String Cstr = "";
+    String Cstr = "";
     //try catch for file scanning
     try {
       File Ctxt = new File("Cancer.txt");
       Scanner scan = new Scanner(Ctxt);
       while(scan.hasNextLine())
       {
-          Cstr += scan.nextLine()+"\n";
+          Cstr += scan.nextLine();
       }
     } catch (IOException e) {
       System.out.println("An error occurred.");
       e.printStackTrace();
     }
+    
     //Putting String in to grid
+    int i = 0;
     for(int r=0;r<grid.length;r++)
     {
        for(int c=0;c<grid[r].length;c++)
        {
-           grid[r][c]=Cstr.substring(r,r+1);
+           grid[r][c]=Cstr.substring(i,i+1);
+           i++;
        }
     }
-   
-    //Printing out String   
-        System.out.println(Cstr);
-        for(int r=1;r<grid.length-1;r++)
+    
+    //printing out grid
+    for(int r=0;r<grid.length;r++)
     {
-       for(int c=1;c<grid[r].length-1;c++)
+       for(int c=0;c<grid[r].length;c++)
+       {
+           System.out.print(grid[r][c]);
+       }
+        System.out.println();
+    }
+    
+    //scanning the grid for cancers  
+    for(int r=1;r<grid.length;r++)
+    {
+       for(int c=1;c<grid[r].length;c++)
        {
            if(grid[r][c].equals("-"))
           {
@@ -53,16 +64,11 @@ public class Cancer {
           }
        } 
     }
-    //System.out.println("Number of cancers = " + numcan);
-    for(int r=0;r<grid.length;r++)
-    {
-       for(int c=0;c<grid[r].length;c++)
-       {
-           System.out.print(grid[r][c]);
-       }
-        System.out.println("");
-    }
+    
+    System.out.println("Number of cancers = " + numcan);
   }
+    
+    //searching method
     public static void search(int r, int c)
     {
         if(grid[r][c].equals("-"))
@@ -78,4 +84,5 @@ public class Cancer {
             search(r+1,c+1);
         }
     }
+    
 }
