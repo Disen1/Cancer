@@ -1,8 +1,6 @@
 package cancer;
 
 import java.io.*;
-import java.math.*;
-import java.lang.*;
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -17,8 +15,9 @@ public class Cancer {
     private static int numcan=0;
     
     public static void main(String[] args) {
-    String Cstr = "";
+    
     //try catch for file scanning
+    String Cstr = "";
     try {
       File Ctxt = new File("Cancer.txt");
       Scanner scan = new Scanner(Ctxt);
@@ -65,6 +64,16 @@ public class Cancer {
        } 
     }
     
+    for(int r=0;r<grid.length;r++)
+    {
+       for(int c=0;c<grid[r].length;c++)
+       {
+           System.out.print(grid[r][c]);
+       }
+        System.out.println();
+    }
+    
+    //printing ammount of cancers
     System.out.println("Number of cancers = " + numcan);
   }
     
